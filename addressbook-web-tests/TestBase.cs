@@ -39,6 +39,11 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL);
         }
 
+        protected void ReturnToHomePage()
+        {
+            driver.FindElement(By.XPath("//a[contains(text(),'home page')]")).Click();
+        }
+
         protected void Login(AccountData account)
         {
             driver.FindElement(By.Name("user")).Clear();
@@ -84,6 +89,23 @@ namespace WebAddressbookTests
         protected void InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
+        }
+        protected void FillContactForm(ContactData contact)
+        {
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+        }
+
+        protected void GoToAddNewPage()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+
+        protected void SubmitContactCreation()
+        {
+            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
         }
     }
 }
