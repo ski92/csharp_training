@@ -63,7 +63,11 @@
     <Compile Include="ContactCreationTests.cs" />
     <Compile Include="ContactData.cs" />
     <Compile Include="GroupData.cs" />
+    <Compile Include="GroupHelper.cs" />
     <Compile Include="GroupRemovalTest.cs" />
+    <Compile Include="HelperBase.cs" />
+    <Compile Include="LoginHelper.cs" />
+    <Compile Include="NavigationHelper.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
