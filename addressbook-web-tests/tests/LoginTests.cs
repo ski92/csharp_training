@@ -21,7 +21,7 @@ namespace WebAddressbookTests
         {
             app.Auth.Logout();
 
-            AccountData account = new AccountData("admin", "2134");
+            AccountData account = new AccountData("admin", "21354");
             app.Auth.Login(account);
 
             Assert.IsFalse(app.Auth.IsLoggedIn());
