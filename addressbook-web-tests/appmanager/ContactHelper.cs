@@ -48,8 +48,19 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification(int i)
         {
+            CreateIfTableIsEmpty();
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).Click();
             return this;
+        }
+
+        private void CreateIfTableIsEmpty()
+        {
+            if (!IsElementPresent(By.XPath("//img[@alt='Edit']")))
+            {
+                ContactData contact = new ContactData("Andrew");
+                contact.Lastname = "Test";
+                Create(contact);
+            }
         }
 
         public ContactHelper SubmitContactModification()
@@ -61,6 +72,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int i)
         {
+            CreateIfTableIsEmpty();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + i + "]")).Click();
             return this;
         }

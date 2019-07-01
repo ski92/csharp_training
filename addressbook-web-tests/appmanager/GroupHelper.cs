@@ -63,8 +63,19 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
+            CreateIfListIsEmpty();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
+        }
+        private void CreateIfListIsEmpty()
+        {
+            if (!IsElementPresent(By.XPath("//input[@name='selected[]")))
+            {
+                GroupData group = new GroupData("aaa");
+                group.Header = "sss";
+                group.Footer = "ddd";
+                Create(group);
+            }
         }
 
         public GroupHelper SubmitGroupCreation()
