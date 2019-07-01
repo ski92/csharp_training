@@ -13,7 +13,7 @@ namespace WebAddressbookTests
             AccountData account = new AccountData("admin", "secret");
             app.Auth.Login(account);
 
-            Assert.IsTrue(app.Auth.IsLoggedIn());
+            Assert.IsTrue(app.Auth.IsLoggedIn(account));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace WebAddressbookTests
             AccountData account = new AccountData("admin", "21354");
             app.Auth.Login(account);
 
-            Assert.IsFalse(app.Auth.IsLoggedIn());
+            Assert.IsFalse(app.Auth.IsLoggedIn(account));
         }
     }
 }
