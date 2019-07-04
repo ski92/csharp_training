@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Collections.Generic;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -21,6 +23,7 @@ namespace WebAddressbookTests
             ReturnToHomePage();
             return this;
         }
+
         public ContactHelper Modify(int i, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
@@ -90,6 +93,41 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             return this;
+        }
+
+        public List<ContactData> GetContactNamesLists()
+        {
+            manager.Navigator.GoToHomePage();
+
+            List<ContactData> firstnames_list = new List<ContactData>();
+
+            manager.Navigator.GoToGroupsPage();
+
+            ICollection<IWebElement> firstnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
+
+            foreach (IWebElement firstname in firstnames)
+            {
+                firstnames_list.Add(new ContactData(firstname.Text));
+
+            }
+            return firstnames_list;
+        }
+
+        public List<ContactData> GetContactLastnamesLists()
+        {
+            manager.Navigator.GoToHomePage();
+
+            List<ContactData> lastnames_list = new List<ContactData>();
+            manager.Navigator.GoToGroupsPage();
+
+            ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
+
+            foreach (IWebElement lastname in lastnames)
+            {
+                lastnames_list.Add(new ContactData(lastname.Text));
+
+            }
+            return lastnames_list;
         }
     }
 }
