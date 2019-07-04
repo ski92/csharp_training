@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -12,7 +13,12 @@ namespace WebAddressbookTests
             group.Header = "sss";
             group.Footer = "ddd";
 
+            List<GroupData> oldGroups = app.Groups.GetGroupLists();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupLists();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
         [Test]
@@ -22,7 +28,27 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
 
+            List<GroupData> oldGroups = app.Groups.GetGroupLists();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupLists();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+        }
+
+        [Test]
+        public void BadNameGroupCreationTest()
+        {
+            GroupData group = new GroupData("a'");
+            group.Header = "";
+            group.Footer = "";
+
+            List<GroupData> oldGroups = app.Groups.GetGroupLists();
+
+            app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupLists();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 }

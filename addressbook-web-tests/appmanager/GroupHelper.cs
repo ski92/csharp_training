@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Collections.Generic;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -91,6 +93,18 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("new")).Click();
             return this;
+        }
+        public List<GroupData> GetGroupLists()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
     }
 }
