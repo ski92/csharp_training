@@ -8,6 +8,10 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
+            GroupData group = new GroupData("aaa");
+            group.Header = "sss";
+            group.Footer = "ddd";
+            app.Groups.CreateIfListIsEmpty(group);
             app.Groups.RemoveGroup(1);
         }
     }
