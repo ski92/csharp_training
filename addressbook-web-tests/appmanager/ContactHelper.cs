@@ -27,7 +27,7 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int i, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
-            InitContactModification(i);
+            InitContactModification(i + 2);
             FillContactForm(newData);
             SubmitContactModification();
             ReturnToHomePage();
@@ -72,7 +72,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int i)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + i + "]")).Click();
+            driver.FindElement(By.XPath("//tr[" + (i + 2) + "]/td/input[@name='selected[]'] ")).Click();
             return this;
         }
 
@@ -94,40 +94,31 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             return this;
         }
-
-        public List<ContactData> GetContactNamesLists()
+        public List<ContactData> GetContactsLists()
         {
             manager.Navigator.GoToHomePage();
+            List<ContactData> names_list = new List<ContactData>();
 
-            List<ContactData> firstnames_list = new List<ContactData>();
+            ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
 
-            manager.Navigator.GoToGroupsPage();
-
-            ICollection<IWebElement> firstnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
-
-            foreach (IWebElement firstname in firstnames)
-            {
-                firstnames_list.Add(new ContactData(firstname.Text));
-
-            }
-            return firstnames_list;
-        }
-
-        public List<ContactData> GetContactLastnamesLists()
-        {
-            manager.Navigator.GoToHomePage();
-
-            List<ContactData> lastnames_list = new List<ContactData>();
-            manager.Navigator.GoToGroupsPage();
-
-            ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
+            string[] lastnames_list = new string[lastnames.Count];
+            int index = 0;
 
             foreach (IWebElement lastname in lastnames)
             {
-                lastnames_list.Add(new ContactData(lastname.Text));
-
+                lastnames_list[index] = lastname.Text;
+                index++;
             }
-            return lastnames_list;
+
+            ICollection<IWebElement> firstnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
+
+            for (int i = 0; i < lastnames_list.Length; i++)
+
+                foreach (IWebElement firstname in firstnames)
+                {
+                    names_list.Add(new ContactData(firstname.Text, lastnames_list[i]));
+                }
+            return names_list;
         }
     }
 }
