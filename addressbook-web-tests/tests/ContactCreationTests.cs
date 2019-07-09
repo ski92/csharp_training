@@ -9,8 +9,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("Andrew");
-            contact.Lastname = "Test";
+            ContactData contact = new ContactData("Andrew", "Test");
 
             List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
 
@@ -25,12 +24,11 @@ namespace WebAddressbookTests
 
             Assert.AreEqual(oldContactNames, newContactNames);
         }
-
+        
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData("");
-            contact.Lastname = "";
+            ContactData contact = new ContactData("", "");
 
             List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
 

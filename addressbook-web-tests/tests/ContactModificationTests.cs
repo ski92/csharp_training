@@ -10,12 +10,10 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData contact = new ContactData("Andrew");
-            contact.Lastname = "Test";
+            ContactData contact = new ContactData("Andrew", "Test");
             app.Contacts.CreateIfTableIsEmpty(contact);
 
-            ContactData newData = new ContactData("Qwerty");
-            newData.Lastname = "Asd";
+            ContactData newData = new ContactData("Qwerty", "Asd");
 
             List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
 
@@ -24,6 +22,7 @@ namespace WebAddressbookTests
             List<ContactData> newContactNames = app.Contacts.GetContactsLists();
 
             oldContactNames[0].Firstname = newData.Firstname;
+            //oldContactNames[0].Lastname = newData.Lastname;
 
             oldContactNames.Sort();
             newContactNames.Sort();

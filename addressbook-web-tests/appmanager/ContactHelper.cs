@@ -96,29 +96,24 @@ namespace WebAddressbookTests
         }
         public List<ContactData> GetContactsLists()
         {
-            manager.Navigator.GoToHomePage();
             List<ContactData> names_list = new List<ContactData>();
 
-            ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
+            manager.Navigator.GoToHomePage();
 
-            string[] lastnames_list = new string[lastnames.Count];
-            int index = 0;
-
-            foreach (IWebElement lastname in lastnames)
-            {
-                lastnames_list[index] = lastname.Text;
-                index++;
-            }
+            //ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
 
             ICollection<IWebElement> firstnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
 
-            for (int i = 0; i < lastnames_list.Length; i++)
-
-                foreach (IWebElement firstname in firstnames)
-                {
-                    names_list.Add(new ContactData(firstname.Text, lastnames_list[i]));
-                }
+            foreach (IWebElement firstname in firstnames)
+            {
+                names_list.Add(new ContactData(firstname.Text));
+            }
+            //foreach (IWebElement lastname in lastnames)
+            //{
+            //    names_list.Add(new ContactData("", lastname.Text));
+            //}
             return names_list;
         }
     }
 }
+
