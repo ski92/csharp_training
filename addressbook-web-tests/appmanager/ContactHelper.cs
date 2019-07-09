@@ -47,6 +47,7 @@ namespace WebAddressbookTests
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -65,6 +66,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -91,24 +93,39 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("td")).Count;
+        }
+
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactsLists()
         {
-            List<ContactData> contact_list = new List<ContactData>();
-            List<IWebElement> contacts = new List<IWebElement>();
-
-            manager.Navigator.GoToHomePage();
-
-            ICollection<IWebElement> records = driver.FindElements(By.Name("entry"));
-
-            foreach (IWebElement record in records)
+            if (contactCache == null)
             {
-                contacts = record.FindElements((By.TagName("td"))).ToList();
-                contact_list.Add(new ContactData(contacts[2].Text, contacts[1].Text));
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+
+                List<IWebElement> contacts = new List<IWebElement>();
+
+                ICollection<IWebElement> records = driver.FindElements(By.Name("entry"));
+
+                foreach (IWebElement record in records)
+                {
+                    contacts = record.FindElements((By.TagName("td"))).ToList();
+                    contactCache.Add(new ContactData(contacts[2].Text, contacts[1].Text)
+                    {
+                        Id = record.FindElement(By.Name("selected[]")).GetAttribute("id")
+                    });
+                }
             }
-            return contact_list;
+            return new List<ContactData>(contactCache);
         }
     }
 }
+
 
