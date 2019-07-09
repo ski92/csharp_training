@@ -11,7 +11,11 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData contact = new ContactData("Andrew", "Test");
-            app.Contacts.CreateIfTableIsEmpty(contact);
+
+            if (!app.Contacts.IsContactsExist())
+            {
+                app.Contacts.Create(contact);
+            }
 
             ContactData newData = new ContactData("Qwerty", "Asd");
 

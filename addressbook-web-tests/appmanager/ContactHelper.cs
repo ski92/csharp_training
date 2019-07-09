@@ -55,12 +55,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public void CreateIfTableIsEmpty(ContactData contact)
+        public bool IsContactsExist()
         {
-            if (!IsElementPresent(By.XPath("//img[@alt='Edit']")))
-            {
-                Create(contact);
-            }
+            return IsElementPresent(By.XPath("//img[@alt='Edit']"));
+
         }
 
         public ContactHelper SubmitContactModification()

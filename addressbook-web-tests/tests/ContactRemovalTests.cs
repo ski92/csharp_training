@@ -10,7 +10,11 @@ namespace WebAddressbookTests
         public void ContactRemovalTest()
         {
             ContactData contact = new ContactData("Andrew", "Test");
-            app.Contacts.CreateIfTableIsEmpty(contact);
+
+            if (!app.Contacts.IsContactsExist())
+            {
+                app.Contacts.Create(contact);
+            }
 
             List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
 

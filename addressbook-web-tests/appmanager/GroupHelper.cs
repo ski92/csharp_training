@@ -68,12 +68,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
-        public void CreateIfListIsEmpty(GroupData group)
+        public bool IsGroupsExist()
         {
-            if (!IsElementPresent(By.XPath("//input[@name='selected[]")))
-            {
-                Create(group);
-            }
+            return IsElementPresent(By.XPath("//input[@name='selected[]"));
         }
 
         public GroupHelper SubmitGroupCreation()

@@ -13,7 +13,11 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("aaa");
             group.Header = "sss";
             group.Footer = "ddd";
-            app.Groups.CreateIfListIsEmpty(group);
+
+            if (!app.Groups.IsGroupsExist())
+            {
+                app.Groups.Create(group);
+            }
 
             GroupData newData = new GroupData("bbb");
             newData.Header = "zzz";
