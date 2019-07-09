@@ -52,7 +52,7 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return Firstname == other.Firstname/* && Lastname == other.Lastname*/;
+            return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
@@ -62,7 +62,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "firstname = " + Firstname/* + ", " + "lastname = " + Lastname*/;
+            return "firstname = " + Firstname + ", " + "lastname = " + Lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -71,7 +71,7 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname)/* + Lastname.CompareTo(other.Lastname)*/;
+            return Firstname.CompareTo(other.Firstname) + Lastname.CompareTo(other.Lastname);
         }
     }
 }

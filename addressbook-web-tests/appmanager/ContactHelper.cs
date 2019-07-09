@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace WebAddressbookTests
@@ -94,23 +95,19 @@ namespace WebAddressbookTests
         }
         public List<ContactData> GetContactsLists()
         {
-            List<ContactData> names_list = new List<ContactData>();
+            List<ContactData> contact_list = new List<ContactData>();
+            List<IWebElement> contacts = new List<IWebElement>();
 
             manager.Navigator.GoToHomePage();
 
-            //ICollection<IWebElement> lastnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[2]"));
+            ICollection<IWebElement> records = driver.FindElements(By.Name("entry"));
 
-            ICollection<IWebElement> firstnames = driver.FindElements(By.XPath("//tr[@name='entry']/td[3]"));
-
-            foreach (IWebElement firstname in firstnames)
+            foreach (IWebElement record in records)
             {
-                names_list.Add(new ContactData(firstname.Text));
+                contacts = record.FindElements((By.TagName("td"))).ToList();
+                contact_list.Add(new ContactData(contacts[2].Text, contacts[1].Text));
             }
-            //foreach (IWebElement lastname in lastnames)
-            //{
-            //    names_list.Add(new ContactData("", lastname.Text));
-            //}
-            return names_list;
+            return contact_list;
         }
     }
 }
