@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -6,6 +7,7 @@ namespace WebAddressbookTests
     {
         private String allPhones;
         private String allEmails;
+        private String allData;
         public ContactData(string firstname)
         {
             Firstname = firstname;
@@ -65,6 +67,25 @@ namespace WebAddressbookTests
             }
         }
 
+        public string AllData
+        {
+            get
+            {
+                if (allData != null)
+                {
+                    return allData;
+                }
+                else
+                {
+                    return Firstname + Lastname + Address + HomePhone +
+                        MobilePhone + WorkPhone + Email_1 + Email_2 + Email_3;
+                }
+            }
+            set
+            {
+                allData = value;
+            }
+        }
         private string ClenupPhone(string phone)
         {
             if (phone == null || phone == "")

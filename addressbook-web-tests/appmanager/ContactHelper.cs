@@ -27,7 +27,7 @@ namespace WebAddressbookTests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string email_1 = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email_2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string email_3 = driver.FindElement(By.Name("email3")).GetAttribute("value"); 
+            string email_3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
@@ -40,6 +40,22 @@ namespace WebAddressbookTests
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
+            };
+        }
+
+        public ContactData GetContactInformationFromCard(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            OpenContactCard(index);
+            string allData = driver.FindElement(By.Id("content")).Text;
+            return new ContactData(allData)
+            {
+                AllData = allData
+                .Replace(" ", "")
+                .Replace("H:", "")
+                .Replace("M:", "")
+                .Replace("W:", "")
+                .Replace("\r\n", "")
             };
         }
 
@@ -100,6 +116,14 @@ namespace WebAddressbookTests
         {
             driver.FindElements(By.Name("entry"))[i]
                 .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
+        public ContactHelper OpenContactCard(int i)
+        {
+            driver.FindElements(By.Name("entry"))[i]
+                .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
             return this;
         }
