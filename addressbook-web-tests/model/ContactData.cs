@@ -132,11 +132,17 @@ namespace WebAddressbookTests
 
         public int CompareTo(ContactData other)
         {
+            int result;
             if (Object.ReferenceEquals(other, null))
             {
-                return 1;
+                result = 1;
             }
-            return Firstname.CompareTo(other.Firstname) + Lastname.CompareTo(other.Lastname);
+            result = Lastname.CompareTo(other.Lastname);
+            if (result == 0)
+            {
+                result = Firstname.CompareTo(other.Firstname);
+            }
+            return result;
         }
     }
 }
