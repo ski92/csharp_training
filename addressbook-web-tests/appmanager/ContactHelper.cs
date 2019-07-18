@@ -48,15 +48,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             OpenContactCard(index);
             string allData = driver.FindElement(By.Id("content")).Text;
-            return new ContactData(allData)
-            {
-                AllData = allData
-                .Replace(" ", "")
-                .Replace("H:", "")
-                .Replace("M:", "")
-                .Replace("W:", "")
-                .Replace("\r\n", "")
-            };
+            return new ContactData(allData);
         }
 
         public ContactData GetContactInformationFromTable(int index)

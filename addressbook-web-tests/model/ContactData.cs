@@ -77,8 +77,50 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return Firstname + Lastname + Address + HomePhone +
-                        MobilePhone + WorkPhone + Email_1 + Email_2 + Email_3;
+                    string s1 = "";
+                    string s2 = "";
+                    string s3 = "";
+                    string s4 = "";
+                    if (Lastname != "")
+                    {
+                        s1 = " ";
+                    }
+                    if (Address != "")
+                    {
+                        s2 = "\r\n";
+                    }
+                    if (AllPhones != "")
+                    {
+                        s3 = "\r\n\r\n";
+                    }
+                    if (HomePhone != "")
+                    {
+                        HomePhone = "H: " + $"{HomePhone}";
+                    }
+                    if (MobilePhone != "" && HomePhone != "")
+                    {
+                        MobilePhone = "\r\nM: " + $"{MobilePhone}";
+                    }
+                    if ((WorkPhone != "" && MobilePhone != "")
+                        || (WorkPhone != "" && HomePhone != ""))
+                    {
+                        WorkPhone = "\r\nW: " + $"{WorkPhone}";
+                    }
+                    if (AllEmails != "")
+                    {
+                        s4 = "\r\n\r\n";
+                    }
+                    if (Email_2 != "" && Email_1 != "")
+                    {
+                        Email_2 = "\r\n" + $"{Email_2}";
+                    }
+                    if ((Email_3 != "" && Email_2 != "")
+                        || (Email_3 != "" && Email_1 != ""))
+                    {
+                        Email_3 = "\r\n" + $"{Email_3}";
+                    }
+                    return Firstname + s1 + Lastname + s2 + Address + s3
+                       + HomePhone + MobilePhone + WorkPhone + s4 + Email_1 + Email_2 + Email_3;
                 }
             }
             set

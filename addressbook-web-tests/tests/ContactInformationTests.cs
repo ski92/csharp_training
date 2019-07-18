@@ -22,6 +22,8 @@ namespace WebAddressbookTests
         {
             ContactData fromCard = app.Contacts.GetContactInformationFromCard(0);
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+            System.Console.Out.Write(("CARD DATA\n" + fromCard.AllData).ToString());
+            System.Console.Out.Write(("FORM DATA\n" + fromForm.AllData).ToString());
             Assert.AreEqual(fromCard.AllData, fromForm.AllData);
         }
     }
