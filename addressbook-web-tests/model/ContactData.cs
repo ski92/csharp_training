@@ -77,50 +77,59 @@ namespace WebAddressbookTests
                 }
                 else
                 {
+                    string s = "";
                     string s1 = "";
                     string s2 = "";
                     string s3 = "";
                     string s4 = "";
+                    string p1 = "";
+                    string p2 = "";
+                    string p3 = "";
+
+                    if (Firstname != "")
+                    {
+                        s = Firstname;
+                    }
                     if (Lastname != "")
                     {
-                        s1 = " ";
+                        s1 = " " + Lastname + "\r\n";
                     }
                     if (Address != "")
                     {
-                        s2 = "\r\n";
-                    }
-                    if (AllPhones != "")
-                    {
-                        s3 = "\r\n\r\n";
+                        s2 = Address + "\r\n";
                     }
                     if (HomePhone != "")
                     {
-                        HomePhone = "H: " + $"{HomePhone}";
+                        p1 = "H: " + HomePhone + "\r\n";
                     }
-                    if (MobilePhone != "" && HomePhone != "")
+                    if (MobilePhone != "")
                     {
-                        MobilePhone = "\r\nM: " + $"{MobilePhone}";
+                        p2 = "M: " + MobilePhone + "\r\n";
                     }
-                    if ((WorkPhone != "" && MobilePhone != "")
-                        || (WorkPhone != "" && HomePhone != ""))
+                    if (WorkPhone != "")
                     {
-                        WorkPhone = "\r\nW: " + $"{WorkPhone}";
+                        p3 = "W: " + WorkPhone;
+                    }
+                    if (AllPhones != "")
+                    {
+                        s3 = "\r\n" + p1 + p2 + p3 + "\r\n";
                     }
                     if (AllEmails != "")
                     {
-                        s4 = "\r\n\r\n";
+                        s4 = AllEmails + " \r\n\r\n";
                     }
-                    if (Email_2 != "" && Email_1 != "")
+                    if (s + s1 + s2 + s3 + s4 == "")
                     {
-                        Email_2 = "\r\n" + $"{Email_2}";
+                        return " \r\n\r\n";
                     }
-                    if ((Email_3 != "" && Email_2 != "")
-                        || (Email_3 != "" && Email_1 != ""))
+                    else
                     {
-                        Email_3 = "\r\n" + $"{Email_3}";
+                        if (AllEmails != "" && AllPhones != "")
+                        {
+                            return s + s1 + s2 + s3 + "\r\n" + s4;
+                        }
                     }
-                    return Firstname + s1 + Lastname + s2 + Address + s3
-                       + HomePhone + MobilePhone + WorkPhone + s4 + Email_1 + Email_2 + Email_3;
+                    return s + s1 + s2 + s3 + s4;
                 }
             }
             set
