@@ -1,0 +1,32 @@
+[
+  {
+    "Firstname": "  a",
+    "Lastname": "aa",
+    "Address": "  aa   ",
+    "MobilePhone": "a a a",
+    "Email_1": "  a  a",
+    "Email_2": "a aa  aa",
+    "Email_3": "a",
+    "HomePhone": "a aaa ",
+    "WorkPhone": "a",
+    "AllPhones": "      a  ",
+    "AllEmails": "aaaa  ",
+    "AllData": "  a aa\r\n  aa   \r\n\r\nH: a aaa \r\nM: a a a\r\nW: a\r\n\r\naaaa   \r\n\r\n",
+    "Id": null
+  },
+  {
+    "Firstname": " ",
+    "Lastname": "   aa   a",
+    "Address": " a  a",
+    "MobilePhone": " a  aa",
+    "Email_1": "  aaa ",
+    "Email_2": " a  aa ",
+    "Email_3": " a  aaaaa",
+    "HomePhone": "   ",
+    "WorkPhone": "aaa ",
+    "AllPhones": "a    a ",
+    "AllEmails": "a",
+    "AllData": "     aa   a\r\n a  a\r\n\r\nH:    \r\nM:  a  aa\r\nW: aaa \r\n\r\na \r\n\r\n",
+    "Id": null
+  }
+]
