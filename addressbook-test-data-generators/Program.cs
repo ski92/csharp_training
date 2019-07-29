@@ -50,6 +50,10 @@ namespace addressbook_test_data_generators
                         AllEmails = TestBase.GenerateRandomString(10),
                     });
                 }
+                else
+                {
+                    System.Console.Out.Write("Unrecognized data type: \"" + dataType + "\"");
+                }
             }
             if (format == "csv")
             {
@@ -73,7 +77,7 @@ namespace addressbook_test_data_generators
             }
             else
             {
-                System.Console.Out.Write("Unrecognized format: \"" + format + "\" or data type: \"" + dataType + "\"");
+                System.Console.Out.Write("Unrecognized format: \"" + format);
             }
             writer.Close();
         }
