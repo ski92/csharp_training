@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
 
         [Test]
@@ -19,14 +21,19 @@ namespace WebAddressbookTests
 
             ContactData newData = new ContactData("Qwerty", "Asd");
 
-            List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
+            List<ContactData> oldContactNames = ContactData.GetAll();
 
-            app.Contacts.Modify(0, newData);
+            ContactData toBeModified = ContactData.GetAll().First();
 
-            List<ContactData> newContactNames = app.Contacts.GetContactsLists();
+            ContactData item = oldContactNames.Find(c => c.Id == toBeModified.Id);
 
-            oldContactNames[0].Firstname = newData.Firstname;
-            oldContactNames[0].Lastname = newData.Lastname;
+            app.Contacts.ModifyContact(toBeModified, newData);
+
+            List<ContactData> newContactNames = ContactData.GetAll();
+
+            int i = oldContactNames.IndexOf(item);
+            oldContactNames[i].Firstname = newData.Firstname;
+            oldContactNames[i].Lastname = newData.Lastname;
 
             oldContactNames.Sort();
             newContactNames.Sort();

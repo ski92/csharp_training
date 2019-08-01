@@ -39,11 +39,11 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {
-            List<ContactData> oldContactNames = app.Contacts.GetContactsLists();
+            List<ContactData> oldContactNames = ContactData.GetAll();
 
             app.Contacts.Create(contact);
 
-            List<ContactData> newContactNames = app.Contacts.GetContactsLists();
+            List<ContactData> newContactNames = ContactData.GetAll();
 
             oldContactNames.Add(contact);
 

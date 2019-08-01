@@ -1,8 +1,12 @@
-﻿using System;
+﻿using LinqToDB.Mapping;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private String allPhones;
@@ -25,15 +29,39 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
+
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
+
+        [Column(Name = "address")]
         public string Address { get; set; }
+
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
+
+        [Column(Name = "email")]
         public string Email_1 { get; set; }
+
+        [Column(Name = "email2")]
         public string Email_2 { get; set; }
+
+        [Column(Name = "email3")]
         public string Email_3 { get; set; }
+
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
+
+        [Column(Name = "work")]
         public string WorkPhone { get; set; }
+
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string Id { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
         public string AllPhones
         {
             get
@@ -160,8 +188,6 @@ namespace WebAddressbookTests
             return email.Replace(" ", "") + "\r\n";
         }
 
-        public string Id { get; set; }
-
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -199,6 +225,15 @@ namespace WebAddressbookTests
                 result = Firstname.CompareTo(other.Firstname);
             }
             return result;
+        }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00")
+                        select c).ToList();
+            }
         }
     }
 }
