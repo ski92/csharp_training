@@ -98,7 +98,8 @@ namespace WebAddressbookTests
         {
            foreach (ContactData contact in ContactData.GetAll())
             {
-                System.Console.Out.WriteLine(contact.Deprecated);
+                var result = GroupData.GetAll();
+                System.Console.Out.WriteLine(result.Count());
             }
         }
     }
