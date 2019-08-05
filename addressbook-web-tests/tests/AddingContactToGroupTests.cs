@@ -28,17 +28,27 @@ namespace WebAddressbookTests
         [Test]
         public void TestRemoveContactFromGroup()
         {
-            List<GroupData> group = GroupData.GetGroups();
-            List<ContactData> oldList = group[0].GetContacts();
+            List<GroupData> groups = GroupData.GetAll();
+            for (int i = 0; i < groups.Count(); i++)
+            {
+                GroupData group = groups[i];
+                List<ContactData> oldList = group.GetContacts();
 
-            app.Contacts.RemoveContactFromGroup(oldList[0], group[0]);
-
-            List<ContactData> newList = group[0].GetContacts();
-            oldList.Remove(oldList[0]);
-            newList.Sort();
-            oldList.Sort();
-
-            Assert.AreEqual(oldList, newList);
+                if (oldList.Count != 0)
+                {
+                    ContactData contactToRemove = oldList[0];
+                    app.Contacts.RemoveContactFromGroup(contactToRemove, group);
+                    List<ContactData> newList = group.GetContacts();
+                    oldList.Remove(contactToRemove);
+                    newList.Sort();
+                    oldList.Sort();
+                    Assert.AreEqual(oldList, newList);
+                }
+                else
+                {
+                    System.Console.Out.WriteLine("There is no contacts in group " + groups[i].Name);
+                }
+            }
         }
     }
 }
